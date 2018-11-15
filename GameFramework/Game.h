@@ -1,5 +1,6 @@
 #include"Player.h"
 #include<SDL.h>
+#include<vector>
 
 class Game
 {
@@ -9,8 +10,12 @@ private:
 
 	int m_currentFrame;
 	bool m_bRunning;
-	GameObject m_go;
-	Player m_player;
+	GameObject* m_go;
+
+	Player* m_player;
+	GameObject* m_enemy;
+
+	std::vector<GameObject*> m_gameObjects;
 
 public:
 	Game(){}
