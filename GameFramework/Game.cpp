@@ -1,6 +1,7 @@
-#include<SDL.h>
-#include<iostream>
 #include"Game.h"
+#include<SDL_image.h>
+#include<iostream>
+
 using namespace std;
 
 bool Game::init(const char* title, int xpos, int ypos,
@@ -20,7 +21,10 @@ bool Game::init(const char* title, int xpos, int ypos,
 	}
 
 	m_bRunning = true;
-	SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
+
+	//SDL_Surface* pTempSurface = IMG_Load("assets/animate.png");
+	SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
+	SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
 	m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
 
 	SDL_FreeSurface(pTempSurface);
@@ -33,8 +37,6 @@ bool Game::init(const char* title, int xpos, int ypos,
 	m_destinationRectangle.w = m_sourceRectangle.w;
 	m_destinationRectangle.h = m_sourceRectangle.h;
 
-
-	/*SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);*/
 	return true;
 }
 
