@@ -1,6 +1,9 @@
 #include"Game.h"
+#include "InputHandler.h"
 #include"TextureManager.h"
 #include"Enemy.h"
+
+InputHandler* InputHandler::s_pInstance = 0;
 
 bool Game::init(const char* title, int xpos, int ypos,
 	int width, int height, bool fullscreen)
@@ -56,23 +59,18 @@ void Game::update()
 void Game::clean()
 {
 	std::cout << "cleaning game\n";
+	TheInputHandler::Instance()->clean();
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
 }
 
+void Game::quit()
+{
+	clean();
+}
+
 void Game::handleEvents()
 {
-	SDL_Event event;
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-			case SDL_QUIT:
-				m_bRunning = false;
-				break;
-			default:
-				break;
-		}
-	}
+	TheInputHandler::Instance()->update();
 }
