@@ -1,3 +1,4 @@
+#include"Player.h"
 #include<SDL.h>
 
 class Game
@@ -8,6 +9,8 @@ private:
 
 	int m_currentFrame;
 	bool m_bRunning;
+	GameObject m_go;
+	Player m_player;
 
 public:
 	Game(){}
