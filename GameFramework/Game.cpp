@@ -1,7 +1,8 @@
 #include"Game.h"
 #include "InputHandler.h"
-#include"TextureManager.h"
-#include"Enemy.h"
+#include "TextureManager.h"
+#include "Enemy.h"
+#include "Bullet.h"
 
 InputHandler* InputHandler::s_pInstance = 0;
 
@@ -29,6 +30,10 @@ bool Game::init(const char* title, int xpos, int ypos,
 	{
 		return false;
 	}
+	if (!TheTextureManager::Instance()->load("assets/bullet.png", "bullet", m_pRenderer))
+	{
+		return false;
+	}
 	m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
 	m_gameObjects.push_back(new Enemy(new LoaderParams(300, 300, 128, 82, "animate")));
 
@@ -44,6 +49,11 @@ void Game::render()
 	{
 		m_gameObjects[i]->draw();
 	}
+	for (std::vector<GameObject*>::size_type i = 0;
+		i != bullets.size(); i++)
+	{
+		bullets[i]->draw();
+	}
 	SDL_RenderPresent(m_pRenderer);
 }
 
@@ -53,6 +63,11 @@ void Game::update()
 		i != m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->update();
+	}
+	for (std::vector<GameObject*>::size_type i = 0;
+		i != bullets.size(); i++)
+	{
+		bullets[i]->update();
 	}
 }
 
@@ -72,5 +87,11 @@ void Game::quit()
 
 void Game::handleEvents()
 {
+	
 	TheInputHandler::Instance()->update();
+
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z))
+	{
+		bullets.push_back(new Bullet(new LoaderParams(105, 100, 64, 64, "bullet")));
+	}
 }

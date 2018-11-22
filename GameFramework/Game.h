@@ -20,6 +20,7 @@ private:
 	GameObject* m_enemy;
 
 	std::vector<GameObject*> m_gameObjects;
+	std::vector<GameObject*> bullets;
 	Game() {}
 	~Game() {}
 public:
