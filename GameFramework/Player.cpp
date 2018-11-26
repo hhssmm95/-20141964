@@ -42,3 +42,8 @@ void Player::handleInput()
 	}
 
 }
+
+Vector2D Player::getPosition()
+{
+	return this->m_position;
+}

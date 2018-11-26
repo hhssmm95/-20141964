@@ -33,3 +33,17 @@ void SDLGameObject::clean()
 {
 }
 
+Vector2D SDLGameObject::getPosition()
+{
+	return m_position;
+}
+
+SDL_Rect SDLGameObject::getCollider()
+{
+	m_collider.x = m_position.getX();
+	m_collider.y = m_position.getY();
+	m_collider.w = m_width;
+	m_collider.h = m_height;
+	return m_collider;
+}
+

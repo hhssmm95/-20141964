@@ -45,7 +45,5 @@ public:
 	void clean();
 	bool running() { return m_bRunning; }
 	void quit();
-
-
 };
 typedef Game TheGame;
